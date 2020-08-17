@@ -16,7 +16,7 @@ function VideoPlayer() {
     <div className={classes.playerWrapper}>
       <ReactPlayer
         muted={true} //Make it false
-        playing={true}
+        playing={false}
         height='100%'
         width='100%'
         url='https://firebasestorage.googleapis.com/v0/b/dpl-videoapp.appspot.com/o/sample.mp4?alt=media'

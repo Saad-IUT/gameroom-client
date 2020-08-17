@@ -7,7 +7,6 @@ import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import SkipNextIcon from '@material-ui/icons/SkipNext'
 import CommentIcon from '@material-ui/icons/Comment'
 import FullscreenIcon from '@material-ui/icons/Fullscreen'
-import BookmarkIcon from '@material-ui/icons/Bookmark'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -15,7 +14,7 @@ import Button from '@material-ui/core/Button'
 import Slider from '@material-ui/core/Slider'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
-
+import BookmarksTwoToneIcon from '@material-ui/icons/BookmarksTwoTone';
 const useStyles = makeStyles({
   controlsWrapper: {
     position: 'absolute',
@@ -47,7 +46,7 @@ function ValueLabelComponent(props) {
 
 const PrettoSlider = withStyles({
   root: {
-    color: '#e50914',
+    color: 'primary',
     height: 8,
     padding: 0,
   },
@@ -80,9 +79,9 @@ function Controls() {
     <div className={classes.controlsWrapper}>
       <Grid container style={{ padding: 16 }}>
           <Button
-            variant='contained'
+            size='large'
             color='primary'
-            startIcon={<BookmarkIcon />}
+            startIcon={<BookmarksTwoToneIcon />}
           />
       </Grid>
       <Grid
