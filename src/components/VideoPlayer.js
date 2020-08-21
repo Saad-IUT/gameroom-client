@@ -2,6 +2,7 @@ import React from 'react'
 import ReactPlayer from 'react-player'
 import Controls from './Controls'
 import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
 
 const useStyles = makeStyles({
   playerWrapper: {
@@ -13,6 +14,8 @@ const useStyles = makeStyles({
 function VideoPlayer() {
   const classes = useStyles()
   return (
+    <Container maxWidth='md'>
+
     <div className={classes.playerWrapper}>
       <ReactPlayer
         muted={true} //Make it false
@@ -23,6 +26,7 @@ function VideoPlayer() {
       />
       <Controls />
     </div>
+    </Container>
   )
 }
 

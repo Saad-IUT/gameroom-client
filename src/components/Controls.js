@@ -10,11 +10,10 @@ import FullscreenIcon from '@material-ui/icons/Fullscreen'
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import Slider from '@material-ui/core/Slider'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
-import BookmarksTwoToneIcon from '@material-ui/icons/BookmarksTwoTone';
+import BookmarksTwoToneIcon from '@material-ui/icons/BookmarksTwoTone'
 const useStyles = makeStyles({
   controlsWrapper: {
     position: 'absolute',
@@ -55,7 +54,7 @@ const PrettoSlider = withStyles({
     width: 14,
 
     marginTop: -5,
-    marginLeft: -12,
+    marginLeft: 0,
     '&:focus, &:hover, &$active': {
       boxShadow: 'inherit',
     },
@@ -66,6 +65,7 @@ const PrettoSlider = withStyles({
   track: {
     height: 3,
     borderRadius: 2,
+
   },
   rail: {
     height: 3,
@@ -77,12 +77,13 @@ function Controls() {
   const classes = useStyles()
   return (
     <div className={classes.controlsWrapper}>
-      <Grid container style={{ padding: 16 }}>
-          <Button
-            size='large'
-            color='primary'
-            startIcon={<BookmarksTwoToneIcon />}
-          />
+      <Grid container justify='space-between' style={{ padding: 16 }}>
+        <Grid item></Grid>
+        <Grid item>
+          <IconButton>
+            <BookmarksTwoToneIcon color='primary' fontSize='medium' />
+          </IconButton>
+        </Grid>
       </Grid>
       <Grid
         container
@@ -90,8 +91,9 @@ function Controls() {
         alignItems='center'
         justify='space-between'
         style={{
-          paddingLeft: 24,
-          paddingRight: 24,
+          paddingLeft: 12,
+          paddingRight: 16,
+          paddingBottom: 2,
         }}
       >
         <Grid container xs={12}>
@@ -99,7 +101,7 @@ function Controls() {
             <PrettoSlider
               min={0}
               max={100}
-              defaultValue={20}
+              defaultValue={100}
               ValueLabelComponent={ValueLabelComponent}
             />
           </Grid>
