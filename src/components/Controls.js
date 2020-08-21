@@ -65,7 +65,6 @@ const PrettoSlider = withStyles({
   track: {
     height: 3,
     borderRadius: 2,
-
   },
   rail: {
     height: 3,

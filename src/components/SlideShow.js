@@ -1,9 +1,8 @@
 import React from 'react'
 import Carousel from 'react-elastic-carousel'
 import Item from './Item'
-import './styles.css'
 
-function Home() {
+function SlideShow() {
   return (
     <div className='carousel'>
       <Carousel
@@ -53,4 +52,4 @@ function Home() {
   )
 }
 
-export default Home
+export default SlideShow

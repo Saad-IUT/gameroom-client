@@ -1,10 +1,12 @@
 import React from 'react'
-import Carousel from './Carousel'
+import SlideShow from './SlideShow'
+import Videos from './Videos'
 
 function Home() {
   return (
     <div>
-      <Carousel />
+      <SlideShow />
+      <Videos />
     </div>
   )
 }
