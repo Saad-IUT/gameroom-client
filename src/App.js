@@ -6,19 +6,20 @@ import Layout from './components/Layout'
 import Home from './components/Home'
 import VideoPlayer from './components/VideoPlayer'
 import themeObject from './util/theme'
+import 'antd/dist/antd.css'
 
 const theme = createMuiTheme(themeObject)
 
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <Layout>
-        <Router>
+      <Router>
+        <Layout>
           <Route exact path='/' component={Home} />
           <Route exact path='/video' component={VideoPlayer} />
           {/* <Route exact path='/user/{user}' component={Profile}/> */}
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     </MuiThemeProvider>
   )
 }

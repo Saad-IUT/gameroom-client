@@ -11,6 +11,7 @@ const useStyles = makeStyles({
     position: 'relative',
   },
 })
+
 function VideoPlayer() {
   const classes = useStyles()
   return (

@@ -14,6 +14,7 @@ import Slider from '@material-ui/core/Slider'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 import BookmarksTwoToneIcon from '@material-ui/icons/BookmarksTwoTone'
+
 const useStyles = makeStyles({
   controlsWrapper: {
     position: 'absolute',
