@@ -1,0 +1,13 @@
+body{
+  background: lightgray;
+}
+.footer {
+  background-color: black;
+  padding: 40px 80px;
+}
+.carousel{
+  margin-bottom: 20px;
+}
+.app_page {
+  display: flex;
+}

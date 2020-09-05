@@ -10,7 +10,7 @@ class Test extends Component {
       height: '90vh',
     }
     return (
-      <div>
+      <div className='carousel'>
         <Carousel autoplay>
           <div>
             <img

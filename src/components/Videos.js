@@ -1,9 +1,12 @@
 import React from 'react'
+import RecommendedVideos from './LatestVideos'
+import SideBar from './SideBar'
 
 function Videos() {
   return (
-    <div>
-      <p>Videos</p>
+    <div className='app_page'>
+      <RecommendedVideos/>
+      <SideBar/>
     </div>
   )
 }

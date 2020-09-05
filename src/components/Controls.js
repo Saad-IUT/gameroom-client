@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import Replay10Icon from '@material-ui/icons/Replay10'
 import Forward10Icon from '@material-ui/icons/Forward10'
@@ -11,9 +11,9 @@ import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Slider from '@material-ui/core/Slider'
-import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
-import BookmarksTwoToneIcon from '@material-ui/icons/BookmarksTwoTone'
+import PauseIcon from '@material-ui/icons/Pause'
+import VolumeOffIcon from '@material-ui/icons/VolumeOff'
 
 const useStyles = makeStyles({
   controlsWrapper: {
@@ -26,6 +26,9 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  bottomControls: {
+    background: 'linear-gradient(180deg, rgba(0,0,0,0) , rgba(0,0,0,0.9) )',
+  },
   bottomIcons: {
     color: '#fff',
   },
@@ -34,20 +37,10 @@ const useStyles = makeStyles({
     color: '#fff',
   },
 })
-function ValueLabelComponent(props) {
-  const { children, open, value } = props
-
-  return (
-    <Tooltip open={open} enterTouchDelay={0} placement='top' title={value}>
-      {children}
-    </Tooltip>
-  )
-}
 
 const PrettoSlider = withStyles({
   root: {
     color: 'primary',
-    height: 8,
     padding: 0,
   },
   thumb: {
@@ -55,7 +48,6 @@ const PrettoSlider = withStyles({
     width: 14,
 
     marginTop: -5,
-    marginLeft: 0,
     '&:focus, &:hover, &$active': {
       boxShadow: 'inherit',
     },
@@ -64,100 +56,136 @@ const PrettoSlider = withStyles({
     left: 'calc(-50% + 4px)',
   },
   track: {
-    height: 3,
-    borderRadius: 2,
+    height: 4,
   },
   rail: {
-    height: 3,
-    borderRadius: 2,
+    height: 4,
   },
 })(Slider)
 
-function Controls() {
-  const classes = useStyles()
-  return (
-    <div className={classes.controlsWrapper}>
-      <Grid container justify='space-between' style={{ padding: 16 }}>
-        <Grid item></Grid>
-        <Grid item>
-          <IconButton>
-            <BookmarksTwoToneIcon color='primary' fontSize='medium' />
-          </IconButton>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        direction='row'
-        alignItems='center'
-        justify='space-between'
-        style={{
-          paddingLeft: 12,
-          paddingRight: 16,
-          paddingBottom: 2,
-        }}
-      >
-        <Grid container xs={12}>
-          <Grid item xs={11}>
-            <PrettoSlider
-              min={0}
-              max={100}
-              defaultValue={100}
-              ValueLabelComponent={ValueLabelComponent}
-            />
-          </Grid>
-          <Grid item xs={1}>
-            <Typography
-              variant='caption'
-              style={{
-                color: '#fff',
-                marginLeft: 16,
-              }}
-            >
-              05:05/05:05
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid item>
-          <Grid container alignItems='center' direction='row'>
-            <IconButton className={classes.bottomIcons}>
-              <PlayArrowIcon fontSize='medium' />
-            </IconButton>
-            <IconButton className={classes.bottomIcons}>
-              <Replay10Icon fontSize='medium' />
-            </IconButton>
-            <IconButton className={classes.bottomIcons}>
-              <Forward10Icon fontSize='medium' />
-            </IconButton>
-            <IconButton className={classes.bottomIcons}>
-              <VolumeUpIcon fontSize='medium' />
-            </IconButton>
-            <Slider
-              min={0}
-              max={100}
-              defaultValue={100}
-              className={classes.volumeSlider}
-            />
-          </Grid>
-        </Grid>
-        <Grid item>
-          <Grid container alignItems='center' direction='row'>
-            <IconButton className={classes.bottomIcons}>
-              <HelpOutlineIcon fontSize='medium' />
-            </IconButton>
-            <IconButton className={classes.bottomIcons}>
-              <SkipNextIcon fontSize='medium' />
-            </IconButton>
-            <IconButton className={classes.bottomIcons}>
-              <CommentIcon fontSize='medium' />
-            </IconButton>
-            <IconButton className={classes.bottomIcons}>
-              <FullscreenIcon fontSize='medium' />
-            </IconButton>
-          </Grid>
-        </Grid>
-      </Grid>
-    </div>
-  )
-}
+const Controls = forwardRef(
+  (
+    {
+      onPlayPause,
+      playing,
+      onRewind,
+      onForward,
+      muted,
+      onMute,
+      onVolumeChange,
+      onVolumeSeekUp,
+      volume,
+      onFullScreen,
+      played,
+      onSeek,
+      onSeekMouseDown,
+      onSeekMouseUp,
+      remainingTime,
+    },
+    ref
+  ) => {
+    const classes = useStyles()
 
+    return (
+      <div ref={ref} className={classes.controlsWrapper}>
+        <Grid></Grid>
+        <div className={classes.bottomControls}>
+          <Grid
+            container
+            direction='row'
+            alignItems='center'
+            justify='space-between'
+            style={{
+              paddingLeft: 12,
+            }}
+          >
+            <Grid container xs={12}>
+              <Grid item xs={11}>
+                <PrettoSlider
+                  min={0}
+                  max={100}
+                  value={played * 100}
+                  onChange={onSeek}
+                  onMouseDown={onSeekMouseDown}
+                  onChangeCommitted={onSeekMouseUp}
+                />
+              </Grid>
+              <Grid item xs={1}>
+                <Typography
+                  variant='h6'
+                  style={{
+                    color: '#fff',
+                    marginLeft: 30,
+                  }}
+                >
+                  {remainingTime}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container alignItems='center' direction='row'>
+                <IconButton
+                  onClick={onPlayPause}
+                  className={classes.bottomIcons}
+                >
+                  {playing ? (
+                    <PauseIcon fontSize='medium' />
+                  ) : (
+                    <PlayArrowIcon fontSize='medium' />
+                  )}
+                </IconButton>
+                <IconButton className={classes.bottomIcons} onClick={onRewind}>
+                  <Replay10Icon fontSize='large' />
+                </IconButton>
+                <IconButton className={classes.bottomIcons} onClick={onForward}>
+                  <Forward10Icon fontSize='large' />
+                </IconButton>
+                <IconButton onClick={onMute} className={classes.bottomIcons}>
+                  {muted ? (
+                    <VolumeOffIcon fontSize='medium' />
+                  ) : (
+                    <VolumeUpIcon fontSize='medium' />
+                  )}
+                </IconButton>
+                <Slider
+                  min={0}
+                  max={100}
+                  value={volume * 100}
+                  className={classes.volumeSlider}
+                  onChange={onVolumeChange}
+                  onChangeCommitted={onVolumeSeekUp}
+                />
+                <Typography
+                  variant='h6'
+                  style={{ color: '#fff', paddingLeft: 24 }}
+                >
+                  • Rainbow six siege
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Grid container alignItems='center' direction='row'>
+                <IconButton className={classes.bottomIcons}>
+                  <HelpOutlineIcon fontSize='medium' />
+                </IconButton>
+                <IconButton className={classes.bottomIcons}>
+                  <SkipNextIcon fontSize='medium' />
+                </IconButton>
+                <IconButton className={classes.bottomIcons}>
+                  <CommentIcon fontSize='medium' />
+                </IconButton>
+                <IconButton
+                  onClick={onFullScreen}
+                  className={classes.bottomIcons}
+                >
+                  <FullscreenIcon fontSize='medium' />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+        </div>
+      </div>
+    )
+  }
+)
 export default Controls

@@ -20,6 +20,9 @@ class Header extends Component {
             <Button color='inherit' component={Link} to='/profile'>
               Profile
             </Button>
+            <Button color='inherit' component={Link} to='/login'>
+              Login
+            </Button>
           </Toolbar>
         </AppBar>
         <Toolbar />
