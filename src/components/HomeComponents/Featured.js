@@ -4,7 +4,7 @@ import { Paper, Grid } from '@material-ui/core'
 
 function Featured() {
   return (
-    <div style={{ paddingTop: '40px', paddingBottom: '60px' }}>
+    <div style={{ paddingTop: '60px', paddingBottom: '30px' }}>
       <h2>Recommended & Featured</h2>
       <hr
         style={{
