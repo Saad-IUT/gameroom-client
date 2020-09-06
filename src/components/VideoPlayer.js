@@ -76,7 +76,7 @@ function VideoPlayer() {
   }
 
   const handleProgress = changeState => {
-    if (count > 30) {
+    if (count > 3) {
       controlsRef.current.style.visibility = 'hidden'
       count = 0
     }
@@ -130,7 +130,7 @@ function VideoPlayer() {
           playing={playing}
           height='100%'
           width='100%'
-          url='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/test.mp4?alt=media'
+          url='https://www.youtube.com/watch?v=Q5Fu8zw_QQg'
           volume={volume}
           onProgress={handleProgress}
         />

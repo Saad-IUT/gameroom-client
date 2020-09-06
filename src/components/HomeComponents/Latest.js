@@ -4,7 +4,7 @@ import { Paper, Grid } from '@material-ui/core'
 
 function Latest() {
   return (
-    <div style={{ paddingTop: '60px', paddingBottom: '60px' }}>
+    <div>
       <h2>Most Recent</h2>
       <hr
         style={{

@@ -11,7 +11,11 @@ function Home() {
     <div>
       <Container>
         <Carousel />
-        <Grid container spacing={4}>
+        <Grid
+          container
+          spacing={4}
+          style={{ paddingTop: '60px', paddingBottom: '80px' }}
+        >
           <Grid item xs={9}>
             <Featured />
             <Popular />

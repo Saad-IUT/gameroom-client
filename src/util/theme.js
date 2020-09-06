@@ -1,15 +1,15 @@
 export default {
   palette: {
     primary: {
-      light: '#FF0000',
-      main: '#e50914',
-      dark: '#008394',
+      light: '#fff', //no use
+      main: '#DC143C',
+      dark: '#F31A45',
       contrastText: '#fff',
     },
     secondary: {
-      light: '#FF0000',
+      light: '#fff', //no use
       main: '#282828',
-      dark: '#b22a00',
+      dark: '#000',
       contrastText: '#fff',
     },
   },
@@ -19,9 +19,11 @@ export default {
     },
     form: {
       textAlign: 'center',
+      paddingBottom: '100px',
     },
     image: {
       margin: '20px auto 20px auto',
+      height: '100px',
     },
     pageTitle: {
       margin: '10px auto 10px auto',

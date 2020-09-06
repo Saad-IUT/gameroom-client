@@ -4,7 +4,7 @@ import { Paper, Grid } from '@material-ui/core'
 
 function Popular() {
   return (
-    <div style={{ paddingBottom: '60px', paddingTop: '40px' }}>
+    <div>
       <h2>Most Popular</h2>
       <hr
         style={{
