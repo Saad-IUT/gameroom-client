@@ -1,10 +1,9 @@
 import React, { useState, useRef } from 'react'
 import ReactPlayer from 'react-player'
-import Controls from './Controls'
+import Controls from '../components/Controls'
 import { makeStyles } from '@material-ui/core/styles'
-import Container from '@material-ui/core/Container'
-import RecommendedVideos from './LatestVideos'
 import screenful from 'screenfull'
+import Popular from '../components/HomeComponents/Popular'
 
 const useStyles = makeStyles({
   playerWrapper: {
@@ -155,7 +154,7 @@ function VideoPlayer() {
           remainingTime={remainingTime}
         />
       </div>
-      <RecommendedVideos />
+      <Popular />
     </>
   )
 }

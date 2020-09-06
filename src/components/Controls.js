@@ -1,4 +1,6 @@
 import React, { forwardRef } from 'react'
+import { Grid, Typography, Slider, IconButton } from '@material-ui/core'
+//Icons
 import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 import Replay10Icon from '@material-ui/icons/Replay10'
 import Forward10Icon from '@material-ui/icons/Forward10'
@@ -7,13 +9,10 @@ import HelpOutlineIcon from '@material-ui/icons/HelpOutline'
 import SkipNextIcon from '@material-ui/icons/SkipNext'
 import CommentIcon from '@material-ui/icons/Comment'
 import FullscreenIcon from '@material-ui/icons/Fullscreen'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import Slider from '@material-ui/core/Slider'
-import IconButton from '@material-ui/core/IconButton'
 import PauseIcon from '@material-ui/icons/Pause'
 import VolumeOffIcon from '@material-ui/icons/VolumeOff'
+//Styles
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
   controlsWrapper: {
