@@ -1,5 +1,5 @@
 import React from 'react'
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Layout from './components/Layout'
@@ -10,32 +10,19 @@ import 'antd/dist/antd.css'
 import './App.css'
 import login from './pages/login'
 import signup from './pages/signup'
-//
-// import React, { Component } from 'react'
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-// import './App.css'
-// import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
-// import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
+import user from './pages/user'
+import profile from './pages/profile'
+
 import jwtDecode from 'jwt-decode'
 // Redux
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import { SET_AUTHENTICATED } from './redux/types'
 import { logoutUser, getUserData } from './redux/actions/userActions'
-// Components
-// import Navbar from './components/layout/Navbar'
-// import themeObject from './util/theme'
+
 import AuthRoute from './util/AuthRoute'
-// Pages
-// import home from './pages/home'
-// import login from './pages/login'
-// import signup from './pages/signup'
-// import user from './pages/user'
 
 import axios from 'axios'
-import profile from './pages/profile'
-
-// const theme = createMuiTheme(themeObject)
 
 axios.defaults.baseURL =
   'https://us-central1-gameroom-esd.cloudfunctions.net/api'
@@ -65,7 +52,8 @@ function App() {
               <Route exact path='/video' component={video} />
               <AuthRoute exact path='/login' component={login} />
               <AuthRoute exact path='/signup' component={signup} />
-              <AuthRoute exact path='/profile' component={profile} />
+              <Route exact path='/users/:handle' component={user} />
+              <Route exact path='/profile' component={profile} />
             </Switch>
           </Layout>
         </Router>

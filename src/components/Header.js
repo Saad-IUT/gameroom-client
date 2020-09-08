@@ -1,35 +1,60 @@
 import React, { Component } from 'react'
-import { AppBar, Toolbar, Button } from '@material-ui/core'
-import Link from 'react-router-dom/Link'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+// MUI stuff
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Button from '@material-ui/core/Button'
+// Icons
 
 class Header extends Component {
-  state = {}
+  
   render() {
+    const { authenticated } = this.props
     return (
-      <div>
+      <>
         <AppBar color='secondary'>
           <Toolbar style={{ margin: 'auto' }}>
-            <Button color='inherit' component={Link} to='/video'>
-              Video
-            </Button>
-            <Button color='inherit' component={Link} to='/'>
-              Home
-            </Button>
-            <Button color='inherit' component={Link} to='/profile'>
-              Profile
-            </Button>
-            <Button color='inherit' component={Link} to='/login'>
-              Login
-            </Button>
-            <Button color='inherit' component={Link} to='/signup'>
-              Signup
-            </Button>
+            {authenticated ? (
+              <>
+                <Button color='inherit' component={Link} to='/video'>
+                  Video
+                </Button>
+                <Button color='inherit' component={Link} to='/'>
+                  Home
+                </Button>
+                <Button color='inherit' component={Link} to='/profile'>
+                  Profile
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button color='inherit' component={Link} to='/video'>
+                  Video
+                </Button>
+                <Button color='inherit' component={Link} to='/'>
+                  Home
+                </Button>
+                <Button color='inherit' component={Link} to='/login'>
+                  Login
+                </Button>
+              </>
+            )}
           </Toolbar>
         </AppBar>
         <Toolbar />
-      </div>
+      </>
     )
   }
 }
 
-export default Header
+Header.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+}
+
+const mapStateToProps = state => ({
+  authenticated: state.user.authenticated,
+})
+
+export default connect(mapStateToProps)(Header)
