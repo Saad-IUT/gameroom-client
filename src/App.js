@@ -12,6 +12,7 @@ import login from './pages/login'
 import signup from './pages/signup'
 import user from './pages/user'
 import profile from './pages/profile'
+import upload from './pages/upload'
 
 import jwtDecode from 'jwt-decode'
 // Redux
@@ -54,6 +55,7 @@ function App() {
               <AuthRoute exact path='/signup' component={signup} />
               <Route exact path='/users/:handle' component={user} />
               <Route exact path='/profile' component={profile} />
+              <Route exact path='/upload' component={upload} />
             </Switch>
           </Layout>
         </Router>

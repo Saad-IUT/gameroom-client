@@ -2,30 +2,35 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import NoImg from '../images/no-img.png'
+
 // MUI stuff
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
+import { Avatar } from '@material-ui/core'
 // Icons
 
 class Header extends Component {
-  
   render() {
     const { authenticated } = this.props
     return (
       <>
         <AppBar color='secondary'>
-          <Toolbar style={{ margin: 'auto' }}>
+          <Toolbar style={{}}>
             {authenticated ? (
               <>
-                <Button color='inherit' component={Link} to='/video'>
-                  Video
-                </Button>
                 <Button color='inherit' component={Link} to='/'>
                   Home
                 </Button>
+                <Button color='inherit' component={Link} to='/video'>
+                  Video
+                </Button>
+                <Button color='inherit' component={Link} to='/upload'>
+                  Upload
+                </Button>
                 <Button color='inherit' component={Link} to='/profile'>
-                  Profile
+                  <Avatar alt='Travis Howard' src={NoImg} />
                 </Button>
               </>
             ) : (

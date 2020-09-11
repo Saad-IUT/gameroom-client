@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function VideoCard() {
+export default function VideoCard(props) {
   const classes = useStyles()
 
   return (
@@ -35,17 +35,17 @@ export default function VideoCard() {
     >
       <CardMedia
         className={classes.media}
-        image='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
-        title='Paella dish'
+        image={props.thumbnail}
+        title={props.title}
       />
       <CardHeader
         avatar={
-          <Avatar aria-label='recipe' className={classes.avatar}>
-            R
+          <Avatar className={classes.avatar}>
+            {props.avatar}
           </Avatar>
         }
-        title='Shrimp and Chorizo Paella'
-        subheader='September 14, 2016'
+        title={props.title}
+        subheader={props.date}
       />
     </Card>
   )

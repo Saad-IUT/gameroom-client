@@ -1,85 +1,43 @@
-import React from 'react'
+import React, { Component } from 'react'
 import VideoCard from '../VideoCard'
 import { Paper, Grid } from '@material-ui/core'
+import axios from 'axios'
 
-function Featured() {
-  return (
-    <div style={{ paddingBottom: '60px' }}>
-      <h2>Recommended & Featured</h2>
-      <hr
-        style={{
-          width: '70%',
-          marginLeft: 0,
-          height: '2px',
-          background: 'black',
-        }}
-      />
-      <Paper elevation={16}>
-        <Grid container>
-          <Grid item>
-            <VideoCard
-              title='Dummy Title'
-              views='738 Views'
-              timestamp='1 week ago'
-              channelImage='https://firebasestorage.googleapis.com/v0/b/dpl-videoapp.appspot.com/o/logo.png?alt=media'
-              channel='GameRoom'
-              image='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
-            />
+class Featured extends Component {
+  state = {}
+  componentDidMount() {
+    axios
+      .get('/videos')
+      .then(response => {
+        console.log(response.data[0].userHandle)
+      })
+      .catch(error => {
+        // handle error
+        console.log(error)
+      })
+  }
+  render() {
+    return (
+      <div style={{ paddingBottom: '60px' }}>
+        <h2>Recommended & Featured</h2>
+        <hr
+          style={{
+            width: '70%',
+            marginLeft: 0,
+            height: '2px',
+            background: 'black',
+          }}
+        />
+        <Paper elevation={16}>
+          <Grid container>
+            <Grid item>
+              <VideoCard avatar='' title='' date='' thumbnail='' />
+            </Grid>
           </Grid>
-          <Grid item>
-            <VideoCard
-              title='Dummy Title'
-              views='738 Views'
-              timestamp='1 week ago'
-              channelImage='https://firebasestorage.googleapis.com/v0/b/dpl-videoapp.appspot.com/o/logo.png?alt=media'
-              channel='GameRoom'
-              image='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
-            />
-          </Grid>
-          <Grid item>
-            <VideoCard
-              title='Dummy Title'
-              views='738 Views'
-              timestamp='1 week ago'
-              channelImage='https://firebasestorage.googleapis.com/v0/b/dpl-videoapp.appspot.com/o/logo.png?alt=media'
-              channel='GameRoom'
-              image='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
-            />
-          </Grid>
-          <Grid item>
-            <VideoCard
-              title='Dummy Title'
-              views='738 Views'
-              timestamp='1 week ago'
-              channelImage='https://firebasestorage.googleapis.com/v0/b/dpl-videoapp.appspot.com/o/logo.png?alt=media'
-              channel='GameRoom'
-              image='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
-            />
-          </Grid>
-          <Grid item>
-            <VideoCard
-              title='Dummy Title'
-              views='738 Views'
-              timestamp='1 week ago'
-              channelImage='https://firebasestorage.googleapis.com/v0/b/dpl-videoapp.appspot.com/o/logo.png?alt=media'
-              channel='GameRoom'
-              image='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
-            />
-          </Grid>
-          <Grid item>
-            <VideoCard
-              title='Dummy Title'
-              views='738 Views'
-              timestamp='1 week ago'
-              channelImage='https://firebasestorage.googleapis.com/v0/b/dpl-videoapp.appspot.com/o/logo.png?alt=media'
-              channel='GameRoom'
-              image='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
-            />
-          </Grid>
-        </Grid>
-      </Paper>
-    </div>
-  )
+        </Paper>
+      </div>
+    )
+  }
 }
 
 export default Featured
