@@ -9,7 +9,7 @@ class Featured extends Component {
     axios
       .get('/videos')
       .then(response => {
-        console.log(response.data[0].userHandle)
+        console.log(response.data)
       })
       .catch(error => {
         // handle error
@@ -31,7 +31,7 @@ class Featured extends Component {
         <Paper elevation={16}>
           <Grid container>
             <Grid item>
-              <VideoCard avatar='' title='' date='' thumbnail='' />
+              <VideoCard/>
             </Grid>
           </Grid>
         </Paper>

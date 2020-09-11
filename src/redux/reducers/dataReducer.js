@@ -1,5 +1,6 @@
 import {
   SET_SCREAMS,
+  SET_VIDEOS,
   LIKE_SCREAM,
   UNLIKE_SCREAM,
   LOADING_DATA,
@@ -26,6 +27,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         screams: action.payload,
+        loading: false,
+      }
+    case SET_VIDEOS:
+      return {
+        ...state,
+        videos: action.payload,
         loading: false,
       }
     case SET_SCREAM:

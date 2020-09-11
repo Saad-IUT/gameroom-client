@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: '56.25%', // 16:9
   },
   avatar: {
-    backgroundColor: red[500],
+    backgroundColor: red[300],
   },
 }))
 
@@ -35,17 +35,19 @@ export default function VideoCard(props) {
     >
       <CardMedia
         className={classes.media}
-        image={props.thumbnail}
-        title={props.title}
+        image='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
+        title='Sample title'
       />
       <CardHeader
         avatar={
-          <Avatar className={classes.avatar}>
-            {props.avatar}
-          </Avatar>
+          <Avatar
+            className={classes.avatar}
+            alt='sample'
+            src='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/440483846308.png?alt=media'
+          />
         }
-        title={props.title}
-        subheader={props.date}
+        title='Sample title very big bigger'
+        subheader='23 minutes ago'
       />
     </Card>
   )

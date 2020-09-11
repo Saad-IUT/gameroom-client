@@ -1,5 +1,6 @@
 import {
   SET_SCREAMS,
+  SET_VIDEOS,
   LOADING_DATA,
   LIKE_SCREAM,
   UNLIKE_SCREAM,
@@ -15,19 +16,19 @@ import {
 import axios from 'axios'
 
 // Get all screams
-export const getScreams = () => dispatch => {
+export const getVideos = () => dispatch => {
   dispatch({ type: LOADING_DATA })
   axios
-    .get('/screams')
+    .get('/videos')
     .then(res => {
       dispatch({
-        type: SET_SCREAMS,
+        type: SET_VIDEOS,
         payload: res.data,
       })
     })
     .catch(err => {
       dispatch({
-        type: SET_SCREAMS,
+        type: SET_VIDEOS,
         payload: [],
       })
     })
