@@ -1,5 +1,4 @@
 import {
-  SET_SCREAMS,
   SET_VIDEOS,
   LIKE_SCREAM,
   UNLIKE_SCREAM,
@@ -11,8 +10,8 @@ import {
 } from '../types'
 
 const initialState = {
-  screams: [],
-  scream: {},
+  videos: [],
+  video: {},
   loading: false,
 }
 
@@ -23,12 +22,12 @@ export default function (state = initialState, action) {
         ...state,
         loading: true,
       }
-    case SET_SCREAMS:
-      return {
-        ...state,
-        screams: action.payload,
-        loading: false,
-      }
+    // case SET_SCREAMS:
+    //   return {
+    //     ...state,
+    //     screams: action.payload,
+    //     loading: false,
+    //   }
     case SET_VIDEOS:
       return {
         ...state,

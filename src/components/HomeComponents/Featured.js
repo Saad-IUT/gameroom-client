@@ -1,22 +1,19 @@
 import React, { Component } from 'react'
 import VideoCard from '../VideoCard'
 import { Paper, Grid } from '@material-ui/core'
-import axios from 'axios'
+import { connect } from 'react-redux'
+
 
 class Featured extends Component {
-  state = {}
-  componentDidMount() {
-    axios
-      .get('/videos')
-      .then(response => {
-        console.log(response.data)
-      })
-      .catch(error => {
-        // handle error
-        console.log(error)
-      })
+  state = { featuredVideos: [] }
+  componentDidUpdate(prevprops, prevstate) {
+    if (prevprops.data.videos !== this.props.data.videos) {
+      this.setState({ featuredVideos: this.props.data.videos })
+    }
   }
+  
   render() {
+    console.log(this.props)
     return (
       <div style={{ paddingBottom: '60px' }}>
         <h2>Recommended & Featured</h2>
@@ -30,9 +27,19 @@ class Featured extends Component {
         />
         <Paper elevation={16}>
           <Grid container>
-            <Grid item>
-              <VideoCard/>
-            </Grid>
+            {this.props.UI.loading ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                {this.state.featuredVideos.map(video => {
+                  return (
+                    <Grid item key={video.Id}>
+                      <VideoCard videoInfo={video} />
+                    </Grid>
+                  )
+                })}
+              </>
+            )}
           </Grid>
         </Paper>
       </div>
@@ -40,4 +47,9 @@ class Featured extends Component {
   }
 }
 
-export default Featured
+const mapStateToProps = state => ({
+  data: state.data,
+  UI: state.UI,
+})
+
+export default connect(mapStateToProps)(Featured)

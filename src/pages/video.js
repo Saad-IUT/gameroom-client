@@ -2,7 +2,6 @@ import React from 'react'
 import VideoPlayer from '../components/VideoPlayer'
 import { Container, Grid } from '@material-ui/core'
 import Comment from '../components/Comment'
-import Popular from '../components/HomeComponents/Popular'
 
 function VideoPage() {
   return (
@@ -18,7 +17,7 @@ function VideoPage() {
             <Comment />
           </Grid>
           <Grid item xs={3}>
-            <Popular />
+            <p>Videos</p>{' '}
           </Grid>
         </Grid>{' '}
       </Container>

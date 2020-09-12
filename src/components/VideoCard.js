@@ -5,6 +5,8 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
 import Avatar from '@material-ui/core/Avatar'
 import { red } from '@material-ui/core/colors'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -22,8 +24,10 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function VideoCard(props) {
+export default function VideoCard({ videoInfo }) {
+  dayjs.extend(relativeTime)
   const classes = useStyles()
+  const { thumbnail, title, avatar, createdAt } = videoInfo
 
   return (
     <Card
@@ -33,21 +37,11 @@ export default function VideoCard(props) {
       }}
       elevation={3}
     >
-      <CardMedia
-        className={classes.media}
-        image='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
-        title='Sample title'
-      />
+      <CardMedia className={classes.media} image={thumbnail} title={title} />
       <CardHeader
-        avatar={
-          <Avatar
-            className={classes.avatar}
-            alt='sample'
-            src='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/440483846308.png?alt=media'
-          />
-        }
-        title='Sample title very big bigger'
-        subheader='23 minutes ago'
+        avatar={<Avatar className={classes.avatar} alt={title} src={avatar} />}
+        title={title}
+        subheader={dayjs(createdAt).fromNow()}
       />
     </Card>
   )

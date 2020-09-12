@@ -1,32 +1,24 @@
 import React, { useState } from 'react'
-// import logo from "./logo.svg";
-// import './App.css'
 import axios from 'axios'
 import { storage } from '../util/firebase'
 
 function Upload(token) {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState()
-  // "Choose before Pressing the Upload button"
   const [file, setFile] = useState(null)
 
   const onFileChange = event => {
-    // Update the state
     setFile(event.target.files[0])
   }
 
   const onFileUpload = () => {
     setLoading(true)
 
-    // Create an object of formData
     const formData = new FormData()
 
-    // Update the formData object
     formData.append('myFile', file, file.name)
 
-    // Details of the uploaded file
     console.log(file)
-    // const type = file.type.split(`/`)[0]
     const storageRef = storage.ref()
     const videoExtension = file.name.split('.')[file.name.split('.').length - 1]
     const videoFileName = `${Math.round(
@@ -46,11 +38,9 @@ function Upload(token) {
             videoFileName: videoFileName,
           })
           .then(response => {
-            // handle success
             console.log(response)
           })
           .catch(error => {
-            // handle error
             console.log(error.response)
           })
       })
@@ -73,8 +63,6 @@ function Upload(token) {
           <p>File Name: {file.name}</p>
           <p>File Type: {file.type}</p>
           <p>File Size: {fileSize} MB</p>
-
-          {/* <p>Last Modified: {file.lastModifiedDate.toDateString()}</p> */}
         </div>
       )
     } else {
@@ -90,7 +78,6 @@ function Upload(token) {
   return (
     <div className='App'>
       <header className='App-header'>
-        {/* <img src={logo} className='App-logo' alt='logo' /> */}
         <div>
           <input type='file' onChange={onFileChange} />
           {file && (
