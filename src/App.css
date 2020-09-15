@@ -1,5 +1,26 @@
-.footer {
-  background-color: black;
-  padding: 40px 80px;
+.footer-root {
+  display: flex;
+  flex-direction: column;
 }
 
+.footer-footer {
+  padding: 80px 30px 100px 30px;
+  margin-top: 220px;
+  background-color: black;
+}
+
+.footer-title {
+  font-weight: bold;
+  color: white;
+}
+
+.footer-textStyle {
+  color: white;
+  padding: 8px;
+}
+
+@media (min-width: '960px') {
+  .footer-footer {
+    padding: 80px 30px;
+  }
+}

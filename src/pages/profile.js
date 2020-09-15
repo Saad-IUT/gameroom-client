@@ -2,30 +2,46 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
 
-// import Scream from '../components/scream/Scream'
 import Profile from '../components/Profile'
-// import ScreamSkeleton from '../util/ScreamSkeleton'
+import Upload from '../components/Upload'
+import { getUserData } from '../redux/actions/dataActions'
 
 import { connect } from 'react-redux'
 import { Container } from '@material-ui/core'
-// import { getScreams } from '../redux/actions/dataActions'
+import axios from 'axios'
+import ProfileVideo from '../components/ProfileVideo'
 
-class home extends Component {
-  // componentDidMount() {
-  //   this.props.getScreams()
-  // }
+class profile extends Component {
+  state = {
+    profile: null,
+  }
+  componentDidMount() {
+    const handle = localStorage.getItem('Handle')
+    this.props.getUserData(handle)
+    axios
+      .get(`/user/${handle}`)
+      .then(res => {
+        this.setState({
+          profile: res.data.user,
+        })
+      })
+      .catch(err => console.error(err))
+  }
   render() {
-    // const { screams, loading } = this.props.data
-    // let recentScreamsMarkup = !loading ? (
-    //   screams.map(scream => <Scream key={scream.screamId} scream={scream} />)
-    // ) : (
-    //   <ScreamSkeleton />
-    // )
+    const { videos, loading } = this.props.data
+    const videosMarkup = loading ? (
+      <p>Loading data...</p>
+    ) : videos === null ? (
+      <p>No videos from this user</p>
+    ) : (
+      videos.map(video => <ProfileVideo key={video.videoId} video={video} />)
+    )
     return (
       <Container maxWidth='md'>
-        <Grid container spacing={1}>
+        <Grid container spacing={4}>
           <Grid item xs={8}>
-            Video
+            {videosMarkup}
+            <Upload />{' '}
           </Grid>
           <Grid item xs={4}>
             <Profile />
@@ -36,8 +52,8 @@ class home extends Component {
   }
 }
 
-home.propTypes = {
-  // getScreams: PropTypes.func.isRequired,
+profile.propTypes = {
+  getUserData: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 }
 
@@ -45,4 +61,4 @@ const mapStateToProps = state => ({
   data: state.data,
 })
 
-export default connect(mapStateToProps)(home)
+export default connect(mapStateToProps, { getUserData })(profile)

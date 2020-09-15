@@ -8,6 +8,7 @@ import ProfileSkeleton from '../util/ProfileSkeleton'
 import { connect } from 'react-redux'
 import { getUserData } from '../redux/actions/dataActions'
 import { Container, Grid } from '@material-ui/core'
+import ProfileVideo from '../components/ProfileVideo'
 
 class user extends Component {
   state = {
@@ -15,7 +16,7 @@ class user extends Component {
   }
   componentDidMount() {
     const handle = this.props.match.params.handle
-
+    this.props.getUserData(handle)
     axios
       .get(`/user/${handle}`)
       .then(res => {
@@ -26,10 +27,20 @@ class user extends Component {
       .catch(err => console.error(err))
   }
   render() {
+    const { videos, loading } = this.props.data
+    const videosMarkup = loading ? (
+      <p>Loading data...</p>
+    ) : videos === null ? (
+      <p>No videos from this user</p>
+    ) : (
+      videos.map(video => <ProfileVideo key={video.videoId} video={video} />)
+    )
     return (
       <Container maxWidth='md'>
-        <Grid container>
-          <Grid item xs={8}>Videos</Grid>
+        <Grid container spacing={4}>
+          <Grid item xs={8}>
+            {videosMarkup}
+          </Grid>
           <Grid item xs={4}>
             {this.state.profile === null ? (
               <ProfileSkeleton />

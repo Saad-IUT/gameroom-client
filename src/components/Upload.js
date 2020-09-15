@@ -18,7 +18,7 @@ function Upload(token) {
 
     formData.append('myFile', file, file.name)
 
-    console.log(file)
+    // console.log(file)
     const storageRef = storage.ref()
     const videoExtension = file.name.split('.')[file.name.split('.').length - 1]
     const videoFileName = `${Math.round(
@@ -32,7 +32,7 @@ function Upload(token) {
         setLoading(false)
         setFile(null)
         setMessage('Upload success!')
-        console.log('Uploaded a blob or file!', snapshot)
+        // console.log('Uploaded a blob or file!', snapshot)
         axios
           .post('/video', {
             videoFileName: videoFileName,

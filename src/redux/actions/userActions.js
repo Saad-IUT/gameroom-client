@@ -57,6 +57,7 @@ export const logoutUser = () => dispatch => {
 // Get user details
 export const getUserData = () => dispatch => {
   dispatch({ type: LOADING_USER })
+
   axios
     .get('/user')
     .then(res => {
@@ -64,6 +65,7 @@ export const getUserData = () => dispatch => {
         type: SET_USER,
         payload: res.data,
       })
+      localStorage.setItem('Handle', res.data.credentials.handle)
     })
     .catch(err => console.error(err))
 }

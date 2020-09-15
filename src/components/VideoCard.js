@@ -7,6 +7,7 @@ import Avatar from '@material-ui/core/Avatar'
 import { red } from '@material-ui/core/colors'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,22 +28,24 @@ const useStyles = makeStyles(theme => ({
 export default function VideoCard({ videoInfo }) {
   dayjs.extend(relativeTime)
   const classes = useStyles()
-  const { thumbnail, title, avatar, createdAt } = videoInfo
+  const { thumbnail, title, avatar, createdAt, userHandle, videoId } = videoInfo
 
   return (
-    <Card
-      className={classes.root}
-      onClick={() => {
-        console.log('Clicked')
-      }}
-      elevation={3}
-    >
-      <CardMedia className={classes.media} image={thumbnail} title={title} />
-      <CardHeader
-        avatar={<Avatar className={classes.avatar} alt={title} src={avatar} />}
-        title={title}
-        subheader={dayjs(createdAt).fromNow()}
-      />
-    </Card>
+    <Link to={`/videos/${videoId}`}>
+      <Card className={classes.root} elevation={3}>
+        <CardMedia
+          className={classes.media}
+          image={thumbnail}
+          title={`Uploaded by ${userHandle}`}
+        />
+        <CardHeader
+          avatar={
+            <Avatar className={classes.avatar} alt={title} src={avatar} />
+          }
+          title={title}
+          subheader={dayjs(createdAt).fromNow()}
+        />
+      </Card>
+    </Link>
   )
 }

@@ -17,7 +17,7 @@ function VideoPage() {
             <Comment />
           </Grid>
           <Grid item xs={3}>
-            <p>Videos</p>{' '}
+            <p>Static Profile</p>
           </Grid>
         </Grid>{' '}
       </Container>

@@ -112,11 +112,11 @@ function VideoPlayer() {
   const remainingTime = format(duration - currentTime)
 
   const handleMouseMove = () => {
-    console.log('mousemove')
+    // console.log('mousemove')
     controlsRef.current.style.visibility = 'visible'
     count = 0
   }
-
+  const part = window.location.pathname.split('/').pop()
   return (
     <>
       <div
@@ -130,7 +130,7 @@ function VideoPlayer() {
           playing={playing}
           height='100%'
           width='100%'
-          url='https://www.youtube.com/watch?v=Q5Fu8zw_QQg'
+          url={`https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/${part}?alt=media`}
           volume={volume}
           onProgress={handleProgress}
         />

@@ -1,10 +1,9 @@
 import {
-  SET_SCREAMS,
   SET_VIDEOS,
   LOADING_DATA,
   LIKE_SCREAM,
   UNLIKE_SCREAM,
-  DELETE_SCREAM,
+  DELETE_VIDEO,
   SET_ERRORS,
   POST_SCREAM,
   CLEAR_ERRORS,
@@ -114,12 +113,12 @@ export const submitComment = (screamId, commentData) => dispatch => {
     })
 }
 
-// Delete a scream
-export const deleteScream = screamId => dispatch => {
+// Delete a video
+export const deleteVideo = videoId => dispatch => {
   axios
-    .delete(`/scream/${screamId}`)
+    .delete(`/video/${videoId}`)
     .then(() => {
-      dispatch({ type: DELETE_SCREAM, payload: screamId })
+      dispatch({ type: DELETE_VIDEO, payload: videoId })
     })
     .catch(err => console.error(err))
 }
@@ -131,13 +130,13 @@ export const getUserData = userHandle => dispatch => {
     .get(`/user/${userHandle}`)
     .then(res => {
       dispatch({
-        type: SET_SCREAMS,
-        payload: res.data.screams,
+        type: SET_VIDEOS,
+        payload: res.data.videos,
       })
     })
     .catch(() => {
       dispatch({
-        type: SET_SCREAMS,
+        type: SET_VIDEOS,
         payload: null,
       })
     })

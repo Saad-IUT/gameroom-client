@@ -13,7 +13,7 @@ class Featured extends Component {
   }
   
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div style={{ paddingBottom: '60px' }}>
         <h2>Recommended & Featured</h2>

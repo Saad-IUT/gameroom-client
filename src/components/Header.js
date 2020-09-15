@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import NoImg from '../images/no-img.png'
+import MyButton from '../util/MyButton'
 
 // MUI stuff
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/Button'
-import { Avatar } from '@material-ui/core'
 // Icons
+import HomeIcon from '@material-ui/icons/Home'
+import AddIcon from '@material-ui/icons/Add'
+import NotificationsIcon from '@material-ui/icons/Notifications'
 
 class Header extends Component {
   render() {
@@ -17,32 +19,35 @@ class Header extends Component {
     return (
       <>
         <AppBar color='secondary'>
-          <Toolbar style={{}}>
+          <Toolbar style={{ margin: 'auto' }}>
             {authenticated ? (
               <>
-                <Button color='inherit' component={Link} to='/'>
-                  Home
-                </Button>
-                <Button color='inherit' component={Link} to='/video'>
-                  Video
-                </Button>
-                <Button color='inherit' component={Link} to='/upload'>
-                  Upload
-                </Button>
-                <Button color='inherit' component={Link} to='/profile'>
-                  <Avatar alt='Travis Howard' src={NoImg} />
-                </Button>
+                <Link to='/'>
+                  <MyButton tip='Home'>
+                    <HomeIcon color='primary' />
+                  </MyButton>
+                </Link>
+                <Link to='/profile'>
+                  <MyButton tip='Upload a Video'>
+                    <AddIcon color='primary' />
+                  </MyButton>
+                </Link>
+                <Link to=''>
+                  <MyButton tip='Notifications'>
+                    <NotificationsIcon color='primary' />
+                  </MyButton>
+                </Link>
               </>
             ) : (
               <>
-                <Button color='inherit' component={Link} to='/video'>
-                  Video
+                <Button color='inherit' component={Link} to='/login'>
+                  Login
                 </Button>
                 <Button color='inherit' component={Link} to='/'>
                   Home
                 </Button>
-                <Button color='inherit' component={Link} to='/login'>
-                  Login
+                <Button color='inherit' component={Link} to='/signup'>
+                  Signup
                 </Button>
               </>
             )}

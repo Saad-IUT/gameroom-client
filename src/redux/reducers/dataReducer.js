@@ -3,7 +3,7 @@ import {
   LIKE_SCREAM,
   UNLIKE_SCREAM,
   LOADING_DATA,
-  DELETE_SCREAM,
+  DELETE_VIDEO,
   POST_SCREAM,
   SET_SCREAM,
   SUBMIT_COMMENT,
@@ -22,12 +22,7 @@ export default function (state = initialState, action) {
         ...state,
         loading: true,
       }
-    // case SET_SCREAMS:
-    //   return {
-    //     ...state,
-    //     screams: action.payload,
-    //     loading: false,
-    //   }
+   
     case SET_VIDEOS:
       return {
         ...state,
@@ -51,11 +46,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
       }
-    case DELETE_SCREAM:
-      index = state.screams.findIndex(
-        scream => scream.screamId === action.payload
+    case DELETE_VIDEO:
+      index = state.videos.findIndex(
+        video => video.videoId === action.payload
       )
-      state.screams.splice(index, 1)
+      state.videos.splice(index, 1)
       return {
         ...state,
       }
