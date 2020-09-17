@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { storage } from '../util/firebase'
+import { Button, Paper, Typography } from '@material-ui/core'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload'
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile'
+import ProgressBar from './ProgressBar'
 
 function Upload(token) {
+  const handleSelectVideo = () => {
+    const fileInput = document.getElementById('videoSelect')
+    fileInput.click()
+  }
+
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState()
   const [file, setFile] = useState(null)
+  let [progress, setProgress] = useState(null)
 
   const onFileChange = event => {
     setFile(event.target.files[0])
@@ -18,38 +28,46 @@ function Upload(token) {
 
     formData.append('myFile', file, file.name)
 
-    // console.log(file)
     const storageRef = storage.ref()
     const videoExtension = file.name.split('.')[file.name.split('.').length - 1]
     const videoFileName = `${Math.round(
       Math.random() * Date.now()
     ).toString()}.${videoExtension}`
+    var uploadTask = storageRef.child(`/${videoFileName}`).put(file)
 
-    storageRef
-      .child(`/${videoFileName}`)
-      .put(file)
-      .then(snapshot => {
-        setLoading(false)
-        setFile(null)
-        setMessage('Upload success!')
-        // console.log('Uploaded a blob or file!', snapshot)
-        axios
-          .post('/video', {
-            videoFileName: videoFileName,
-          })
-          .then(response => {
-            console.log(response)
-          })
-          .catch(error => {
-            console.log(error.response)
-          })
-      })
-      .catch(err => {
+    uploadTask.on(
+      'state_changed',
+      function (snapshot) {
+        progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        setProgress(progress)
+      },
+      function (err) {
         console.log('Uploading error: ', err)
         setFile(null)
         setLoading(false)
         setMessage('Upload failed!')
-      })
+      },
+      function () {
+        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+          setLoading(false)
+          setFile(null)
+          setMessage('Completed')
+          console.log('Uploaded a blob or file!', downloadURL)
+
+          axios
+            .post('/video', {
+              videoFileName: videoFileName,
+            })
+
+            .then(response => {
+              console.log(response)
+            })
+            .catch(error => {
+              console.log(error.response)
+            })
+        })
+      }
+    )
   }
   const fileData = () => {
     if (file) {
@@ -59,10 +77,12 @@ function Upload(token) {
       }
       return (
         <div>
-          <h2>File Details:</h2>
-          <p>File Name: {file.name}</p>
-          <p>File Type: {file.type}</p>
-          <p>File Size: {fileSize} MB</p>
+          <Paper elavation={24} style={{ padding: 20 }}>
+            <Typography variant='h6'>File Details:</Typography>
+            <Typography variant='body1'>Name: {file.name}</Typography>
+            <Typography variant='body1'>Type: {file.type}</Typography>
+            <Typography variant='body1'>Size: {fileSize} MB</Typography>
+          </Paper>
         </div>
       )
     } else {
@@ -76,24 +96,41 @@ function Upload(token) {
   }
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <div>
-          <input type='file' onChange={onFileChange} />
-          {file && (
-            <button className='buttonload' onClick={onFileUpload}>
-              {loading ? (
-                <div>
-                  <i className='fa fa-circle-o-notch fa-spin'></i> Loading
-                </div>
-              ) : (
-                'Upload!'
-              )}
-            </button>
-          )}
-        </div>
-        {fileData()}
-      </header>
+    <div>
+      <div>
+        <input
+          type='file'
+          id='videoSelect'
+          onChange={onFileChange}
+          hidden='hidden'
+        />
+        {file ? (
+          <>{null}</>
+        ) : (
+          <Button
+            variant='contained'
+            color='primary'
+            startIcon={<InsertDriveFileIcon />}
+            onClick={handleSelectVideo}
+            style={{ marginBottom: '20px' }}
+          >
+            Choose
+          </Button>
+        )}
+        {file && (
+          <Button
+            variant='contained'
+            color='primary'
+            startIcon={<CloudUploadIcon />}
+            onClick={onFileUpload}
+            style={{ marginBottom: '20px' }}
+          >
+            Upload
+          </Button>
+        )}
+      </div>
+      {console.log(progress)}
+      {loading ? <ProgressBar progress={progress} /> : fileData()}
     </div>
   )
 }

@@ -3,15 +3,18 @@ import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Carousel from '../components/HomeComponents/Carousel'
 import Featured from '../components/HomeComponents/Featured'
+import Users from '../components/HomeComponents/Users'
 import { connect } from 'react-redux'
 import { getVideos } from '../redux/actions/dataActions'
+import { getUsers } from '../redux/actions/userActions'
 import PropTypes from 'prop-types'
 
 class home extends Component {
-  state = { featuredVideos: [] }
+  state = { featuredVideos: [], featuredUsers: [] }
 
   componentDidMount() {
     this.props.getVideos()
+    this.props.getUsers()
   }
   render() {
     // console.log(this.props.data)
@@ -29,7 +32,7 @@ class home extends Component {
               <Featured videos={this.state.featuredVideos} />
             </Grid>
             <Grid item xs={3}>
-              <Featured videos={this.state.featuredVideos} />
+              <Users users={this.state.featuredUsers} />
             </Grid>
           </Grid>
         </Container>
@@ -40,6 +43,7 @@ class home extends Component {
 
 home.propTypes = {
   getVideos: PropTypes.func.isRequired,
+  getUsers: PropTypes.func.isRequired,
   data: PropTypes.object.isRequired,
 }
 
@@ -47,4 +51,4 @@ const mapStateToProps = state => ({
   data: state.data,
 })
 
-export default connect(mapStateToProps, { getVideos })(home)
+export default connect(mapStateToProps, { getVideos, getUsers })(home)

@@ -1,10 +1,12 @@
 import {
   SET_USER,
+  SET_USERS,
   SET_ERRORS,
   CLEAR_ERRORS,
   LOADING_UI,
   SET_UNAUTHENTICATED,
   LOADING_USER,
+  LOADING_DATA,
   MARK_NOTIFICATIONS_READ,
 } from '../types'
 import axios from 'axios'
@@ -54,6 +56,25 @@ export const logoutUser = () => dispatch => {
   dispatch({ type: SET_UNAUTHENTICATED })
 }
 
+// Get all users
+export const getUsers = () => dispatch => {
+  dispatch({ type: LOADING_DATA })
+  axios
+    .get('/users')
+    .then(res => {
+      dispatch({
+        type: SET_USERS,
+        payload: res.data,
+      })
+    })
+    .catch(err => {
+      dispatch({
+        type: SET_USERS,
+        payload: [],
+      })
+    })
+}
+
 // Get user details
 export const getUserData = () => dispatch => {
   dispatch({ type: LOADING_USER })
@@ -66,6 +87,7 @@ export const getUserData = () => dispatch => {
         payload: res.data,
       })
       localStorage.setItem('Handle', res.data.credentials.handle)
+      localStorage.setItem('Avatar', res.data.credentials.imageUrl)
     })
     .catch(err => console.error(err))
 }

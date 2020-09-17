@@ -7,7 +7,7 @@ import Upload from '../components/Upload'
 import { getUserData } from '../redux/actions/dataActions'
 
 import { connect } from 'react-redux'
-import { Container } from '@material-ui/core'
+import { Container, Typography } from '@material-ui/core'
 import axios from 'axios'
 import ProfileVideo from '../components/ProfileVideo'
 
@@ -29,6 +29,7 @@ class profile extends Component {
   }
   render() {
     const { videos, loading } = this.props.data
+    console.log(this.props.authenticated)
     const videosMarkup = loading ? (
       <p>Loading data...</p>
     ) : videos === null ? (
@@ -41,7 +42,20 @@ class profile extends Component {
         <Grid container spacing={4}>
           <Grid item xs={8}>
             {videosMarkup}
-            <Upload />{' '}
+            <hr
+              style={{
+                marginTop: 40,
+                marginBottom: 20,
+                height: '2px',
+                background: '#282828',
+              }}
+            />
+            <div>
+              <Typography color='primary' variant='h6'>
+                Select more videos to Upload
+              </Typography>
+              <Upload />
+            </div>
           </Grid>
           <Grid item xs={4}>
             <Profile />

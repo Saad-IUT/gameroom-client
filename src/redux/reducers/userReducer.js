@@ -1,5 +1,6 @@
 import {
   SET_USER,
+  SET_USERS,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   LOADING_USER,
@@ -14,6 +15,7 @@ const initialState = {
   credentials: {},
   likes: [],
   notifications: [],
+  users: [],
 }
 
 export default function (state = initialState, action) {
@@ -35,6 +37,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: true,
+      }
+    case SET_USERS:
+      return {
+        ...state,
+        users: action.payload,
+        loading: false,
       }
     case LIKE_SCREAM:
       return {
