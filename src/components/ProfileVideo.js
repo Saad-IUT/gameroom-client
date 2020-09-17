@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import PropTypes from 'prop-types'
 // import MyButton from '../util/MyButton'
-// import DeleteVideo from './DeleteVideo'
+import DeleteVideo from './DeleteVideo'
 // MUI Stuff
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -34,47 +34,46 @@ const styles = {
 class ProfileVideo extends Component {
   render() {
     dayjs.extend(relativeTime)
+
     const {
       classes,
       video: { description, createdAt, thumbnail, title, videoId, userHandle },
-      // user: {
-      //   authenticated,
-      //   credentials: { handle },
-      // },
+      user: {
+        authenticated,
+        credentials: { handle },
+      },
     } = this.props
 
-    // const deleteButton =
-    //   authenticated && userHandle === handle ? (
-    //     <DeleteVideo videoId={videoId} />
-    //   ) : null
+    const deleteButton =
+      authenticated && userHandle === handle ? (
+        <DeleteVideo videoId={videoId} />
+      ) : null
+
     return (
-      <Link to={`/videos/${videoId}`}>
-        <Card className={classes.card}>
-          <CardMedia
-            image={thumbnail}
-            title={`Uploaded by ${userHandle}`}
-            className={classes.image}
-          />
-          <CardContent className={classes.content}>
+      <Card className={classes.card}>
+        <CardMedia
+          image={thumbnail}
+          title={`Uploaded by ${userHandle}`}
+          className={classes.image}
+        />
+        <CardContent className={classes.content}>
+          <Link to={`/videos/${videoId}`}>
             <Typography variant='h5' color='primary'>
               {title}
             </Typography>
-            {<hr />}
-            {/* <MyButton tip='Edit'>
+          </Link>
+          {<hr />}
+          {/* <MyButton tip='Edit'>
             <EditOutlined />
           </MyButton> */}
-
-            <Typography variant='body1'>{description}</Typography>
-            {<hr />}
-
-            <Typography variant='body2' color='textSecondary'>
-              Uploaded {dayjs(createdAt).fromNow()}
-            </Typography>
-
-            {/* {deleteButton} */}
-          </CardContent>
-        </Card>
-      </Link>
+          <Typography variant='body1'>{description}</Typography>
+          {<hr />}
+          <Typography variant='body2' color='textSecondary'>
+            Uploaded {dayjs(createdAt).fromNow()}
+          </Typography>
+        </CardContent>
+        {deleteButton}
+      </Card>
     )
   }
 }
