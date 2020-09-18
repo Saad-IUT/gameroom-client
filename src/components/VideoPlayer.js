@@ -3,7 +3,6 @@ import ReactPlayer from 'react-player'
 import Controls from '../components/Controls'
 import { makeStyles } from '@material-ui/core/styles'
 import screenful from 'screenfull'
-import axios from 'axios'
 const useStyles = makeStyles({
   playerWrapper: {
     height: '90vh',
@@ -26,8 +25,9 @@ const format = seconds => {
 }
 
 let count = 0
+const videoId = window.location.pathname.split('/').pop()
 
-function VideoPlayer() {
+function VideoPlayer({ title }) {
   const classes = useStyles()
   const [state, setState] = useState({
     playing: true,
@@ -35,10 +35,9 @@ function VideoPlayer() {
     volume: 0.5,
     played: 0,
     seeking: false,
-    title: [],
   })
 
-  const { playing, muted, volume, played, title } = state
+  const { playing, muted, volume, played } = state
 
   const playerRef = useRef(null)
   const playerContainerRef = useRef(null)
@@ -116,15 +115,6 @@ function VideoPlayer() {
     controlsRef.current.style.visibility = 'visible'
     count = 0
   }
-  const videoId = window.location.pathname.split('/').pop()
-  axios
-    .get(`/video/${videoId}`)
-    .then(res => {
-      setState({ ...state, title: res.data.title })
-    })
-    .catch(err => {
-      console.error(err.response)
-    })
   return (
     <>
       <div

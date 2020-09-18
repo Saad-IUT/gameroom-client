@@ -29,6 +29,10 @@ class profile extends Component {
   }
   render() {
     const { videos, loading } = this.props.data
+    const {
+      user: { authenticated },
+    } = this.props
+    console.log(authenticated)
     const videosMarkup = loading ? (
       <p>Loading data...</p>
     ) : videos === null ? (
@@ -38,23 +42,27 @@ class profile extends Component {
     )
     return (
       <Container maxWidth='md'>
-        <Grid container spacing={4} style={{margin:10}}>
+        <Grid container spacing={4} style={{ margin: 10 }}>
           <Grid item xs={8}>
-            {videosMarkup}
-            <hr
-              style={{
-                marginTop: 40,
-                marginBottom: 20,
-                height: '2px',
-                background: '#282828',
-              }}
-            />
-            <div>
-              <Typography color='primary' variant='h6'>
-                Select more videos to Upload
-              </Typography>
-              <Upload />
-            </div>
+            {authenticated && (
+              <>
+                {videosMarkup}
+                <hr
+                  style={{
+                    marginTop: 40,
+                    marginBottom: 20,
+                    height: '2px',
+                    background: '#282828',
+                  }}
+                />
+                <div>
+                  <Typography color='primary' variant='h6'>
+                    Select more videos to Upload
+                  </Typography>
+                  <Upload />
+                </div>
+              </>
+            )}
           </Grid>
           <Grid item xs={4}>
             <Profile />
@@ -72,6 +80,7 @@ profile.propTypes = {
 
 const mapStateToProps = state => ({
   data: state.data,
+  user: state.user,
 })
 
 export default connect(mapStateToProps, { getUserData })(profile)

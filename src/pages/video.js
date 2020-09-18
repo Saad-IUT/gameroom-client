@@ -2,12 +2,29 @@ import React, { Component } from 'react'
 import VideoPlayer from '../components/VideoPlayer'
 import { Container, Grid } from '@material-ui/core'
 import Comment from '../components/Comment'
+import axios from 'axios'
+import StaticProfile from '../components/StaticProfile'
 class VideoPage extends Component {
-  state = {}
+  videoId = window.location.pathname.split('/').pop()
+  state = {
+    title: [],
+    user: [],
+  }
+
+  componentDidMount() {
+    axios
+      .get(`/video/${this.videoId}`)
+      .then(res => {
+        this.setState({ title: res.data.title, user: res.data.user })
+      })
+      .catch(err => {
+        console.error(err.response)
+      })
+  }
   render() {
     return (
       <div>
-        <VideoPlayer />
+        <VideoPlayer title={this.state.title} />
         <Container>
           <Grid
             container
@@ -18,7 +35,7 @@ class VideoPage extends Component {
               <Comment />
             </Grid>
             <Grid item xs={3}>
-              <p>Static Profile</p>
+              <StaticProfile profile={this.state.user} />
             </Grid>
           </Grid>{' '}
         </Container>
