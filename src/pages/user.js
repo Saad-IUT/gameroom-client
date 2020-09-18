@@ -37,7 +37,7 @@ class user extends Component {
     )
     return (
       <Container maxWidth='md'>
-        <Grid container spacing={4}>
+        <Grid container spacing={4} style={{ margin: 10 }}>
           <Grid item xs={8}>
             {videosMarkup}
           </Grid>

@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player'
 import Controls from '../components/Controls'
 import { makeStyles } from '@material-ui/core/styles'
 import screenful from 'screenfull'
-
+import axios from 'axios'
 const useStyles = makeStyles({
   playerWrapper: {
     height: '90vh',
@@ -35,9 +35,10 @@ function VideoPlayer() {
     volume: 0.5,
     played: 0,
     seeking: false,
+    title: [],
   })
 
-  const { playing, muted, volume, played } = state
+  const { playing, muted, volume, played, title } = state
 
   const playerRef = useRef(null)
   const playerContainerRef = useRef(null)
@@ -112,11 +113,18 @@ function VideoPlayer() {
   const remainingTime = format(duration - currentTime)
 
   const handleMouseMove = () => {
-    // console.log('mousemove')
     controlsRef.current.style.visibility = 'visible'
     count = 0
   }
-  const part = window.location.pathname.split('/').pop()
+  const videoId = window.location.pathname.split('/').pop()
+  axios
+    .get(`/video/${videoId}`)
+    .then(res => {
+      setState({ ...state, title: res.data.title })
+    })
+    .catch(err => {
+      console.error(err.response)
+    })
   return (
     <>
       <div
@@ -130,7 +138,7 @@ function VideoPlayer() {
           playing={playing}
           height='100%'
           width='100%'
-          url={`https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/${part}?alt=media`}
+          url={`https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/${videoId}?alt=media`}
           volume={volume}
           onProgress={handleProgress}
         />
@@ -151,6 +159,7 @@ function VideoPlayer() {
           onSeekMouseDown={handleSeekMouseDown}
           onSeekMouseUp={handleSeekMouseUp}
           remainingTime={remainingTime}
+          title={title}
         />
       </div>
     </>

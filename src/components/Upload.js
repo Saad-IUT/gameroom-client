@@ -42,17 +42,16 @@ function Upload(token) {
         setProgress(progress)
       },
       function (err) {
-        console.log('Uploading error: ', err)
+        console.error('Uploading error: ', err)
         setFile(null)
         setLoading(false)
         setMessage('Upload failed!')
       },
       function () {
-        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        uploadTask.snapshot.ref.getDownloadURL().then(() => {
           setLoading(false)
           setFile(null)
           setMessage('Completed')
-          console.log('Uploaded a blob or file!', downloadURL)
 
           axios
             .post('/video', {
@@ -63,7 +62,7 @@ function Upload(token) {
               console.log(response)
             })
             .catch(error => {
-              console.log(error.response)
+              console.error(error.response)
             })
         })
       }
@@ -129,7 +128,6 @@ function Upload(token) {
           </Button>
         )}
       </div>
-      {console.log(progress)}
       {loading ? <ProgressBar progress={progress} /> : fileData()}
     </div>
   )

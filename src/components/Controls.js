@@ -80,6 +80,7 @@ const Controls = forwardRef(
       onSeekMouseDown,
       onSeekMouseUp,
       remainingTime,
+      title,
     },
     ref
   ) => {
@@ -158,7 +159,7 @@ const Controls = forwardRef(
                   variant='h6'
                   style={{ color: '#fff', paddingLeft: 24 }}
                 >
-                  • Rainbow six siege
+                  • {title}
                 </Typography>
               </Grid>
             </Grid>

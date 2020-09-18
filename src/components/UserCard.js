@@ -1,38 +1,38 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import { Paper } from '@material-ui/core'
+import Card from '@material-ui/core/Card'
+import CardMedia from '@material-ui/core/CardMedia'
 import MuiLink from '@material-ui/core/Link'
 import { Link } from 'react-router-dom'
-import CalendarToday from '@material-ui/icons/CalendarToday'
+import { Paper, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
-  paper: {
-    maxWidth: 260,
-    padding: '10px',
-    margin: '20px',
-    cursor: 'pointer',
+  root: {
+    textAlign: 'center',
   },
-  profile: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+  media: {
+    width: 200,
+    height: 200,
+    margin: 'auto',
+    objectFit: 'cover',
+    maxWidth: '100%',
+    borderRadius: '50%',
   },
 }))
 
-export default function UserCard({ userInfo }) {
-  dayjs.extend(relativeTime)
+export default function RecipeReviewCard({ userInfo }) {
   const classes = useStyles()
-  const { createdAt, handle, imageUrl } = userInfo
+  const { imageUrl, handle, bio } = userInfo
 
   return (
-    <Paper className={classes.paper}>
-      <div className={classes.profile}>
-        <div className='image-wrapper'>
-          <img src={imageUrl} alt='profile' className='profile-image' />
-        </div>
-        <hr />
-        <div className='profile-details'>
+    <Link to={`/users/${handle}`}>
+      <Paper elevation={3} style={{ marginBottom: 10, padding: 20 }}>
+        <Card className={classes.root}>
+          <CardMedia
+            className={classes.media}
+            image={imageUrl}
+            title={handle}
+          />
           <MuiLink
             component={Link}
             to={`/users/${handle}`}
@@ -41,11 +41,12 @@ export default function UserCard({ userInfo }) {
           >
             @{handle}
           </MuiLink>
-          <hr />
-          <CalendarToday color='primary' />
-          <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
-        </div>
-      </div>
-    </Paper>
+          <Typography variant='body2'>
+            <b>About : </b>
+            {bio}
+          </Typography>
+        </Card>
+      </Paper>
+    </Link>
   )
 }

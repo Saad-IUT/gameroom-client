@@ -29,7 +29,6 @@ class profile extends Component {
   }
   render() {
     const { videos, loading } = this.props.data
-    console.log(this.props.authenticated)
     const videosMarkup = loading ? (
       <p>Loading data...</p>
     ) : videos === null ? (

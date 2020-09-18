@@ -1,20 +1,12 @@
 import {
   SET_VIDEOS,
   LOADING_DATA,
-  LIKE_SCREAM,
-  UNLIKE_SCREAM,
   DELETE_VIDEO,
-  SET_ERRORS,
-  POST_SCREAM,
   CLEAR_ERRORS,
-  LOADING_UI,
-  SET_SCREAM,
-  STOP_LOADING_UI,
-  SUBMIT_COMMENT,
 } from '../types'
 import axios from 'axios'
 
-// Get all screams
+// Get all videos
 export const getVideos = () => dispatch => {
   dispatch({ type: LOADING_DATA })
   axios
@@ -33,85 +25,65 @@ export const getVideos = () => dispatch => {
     })
 }
 
-// Get a scream
-export const getScream = screamId => dispatch => {
-  dispatch({ type: LOADING_UI })
+// Edit video details
+export const editVideoDetails = (videoDetails, videoId) => dispatch => {
   axios
-    .get(`/scream/${screamId}`)
+    .post(`/video/details/${videoId}`, videoDetails)
     .then(res => {
-      dispatch({
-        type: SET_SCREAM,
-        payload: res.data,
-      })
-      dispatch({ type: STOP_LOADING_UI })
+      console.log(res.data)
     })
     .catch(err => console.error(err))
 }
 
-// Post a scream
-export const postScream = newScream => dispatch => {
-  dispatch({ type: LOADING_UI })
-  axios
-    .post('/scream', newScream)
-    .then(res => {
-      dispatch({
-        type: POST_SCREAM,
-        payload: res.data,
-      })
-      dispatch(clearErrors())
-    })
-    .catch(err => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data,
-      })
-    })
-}
+
+// ---------------------------------------------------------------------------------------
 
 // Like a scream
-export const likeScream = screamId => dispatch => {
-  axios
-    .get(`/scream/${screamId}/like`)
-    .then(res => {
-      dispatch({
-        type: LIKE_SCREAM,
-        payload: res.data,
-      })
-    })
-    .catch(err => console.error(err))
-}
+// export const likeScream = screamId => dispatch => {
+//   axios
+//     .get(`/scream/${screamId}/like`)
+//     .then(res => {
+//       dispatch({
+//         type: LIKE_SCREAM,
+//         payload: res.data,
+//       })
+//     })
+//     .catch(err => console.error(err))
+// }
 
 // Unlike a scream
-export const unlikeScream = screamId => dispatch => {
-  axios
-    .get(`/scream/${screamId}/unlike`)
-    .then(res => {
-      dispatch({
-        type: UNLIKE_SCREAM,
-        payload: res.data,
-      })
-    })
-    .catch(err => console.error(err))
-}
+// export const unlikeScream = screamId => dispatch => {
+//   axios
+//     .get(`/scream/${screamId}/unlike`)
+//     .then(res => {
+//       dispatch({
+//         type: UNLIKE_SCREAM,
+//         payload: res.data,
+//       })
+//     })
+//     .catch(err => console.error(err))
+// }
 
 // Submit a comment
-export const submitComment = (screamId, commentData) => dispatch => {
-  axios
-    .post(`/scream/${screamId}/comment`, commentData)
-    .then(res => {
-      dispatch({
-        type: SUBMIT_COMMENT,
-        payload: res.data,
-      })
-      dispatch(clearErrors())
-    })
-    .catch(err => {
-      dispatch({
-        type: SET_ERRORS,
-        payload: err.response.data,
-      })
-    })
-}
+// export const submitComment = (screamId, commentData) => dispatch => {
+//   axios
+//     .post(`/scream/${screamId}/comment`, commentData)
+//     .then(res => {
+//       dispatch({
+//         type: SUBMIT_COMMENT,
+//         payload: res.data,
+//       })
+//       dispatch(clearErrors())
+//     })
+//     .catch(err => {
+//       dispatch({
+//         type: SET_ERRORS,
+//         payload: err.response.data,
+//       })
+//     })
+// }
+
+// ------------------------------------------------------------------------------------------------
 
 // Delete a video
 export const deleteVideo = videoId => dispatch => {

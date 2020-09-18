@@ -3,7 +3,6 @@ import VideoCard from '../VideoCard'
 import { Paper, Grid } from '@material-ui/core'
 import { connect } from 'react-redux'
 
-
 class Featured extends Component {
   state = { featuredVideos: [] }
   componentDidUpdate(prevprops, prevstate) {
@@ -11,11 +10,12 @@ class Featured extends Component {
       this.setState({ featuredVideos: this.props.data.videos })
     }
   }
-  
+
   render() {
-    // console.log(this.props)
+    const { loading } = this.props.UI
+    const { featuredVideos } = this.state
     return (
-      <div style={{ paddingBottom: '60px' }}>
+      <div>
         <h2>Recommended & Featured</h2>
         <hr
           style={{
@@ -27,17 +27,23 @@ class Featured extends Component {
         />
         <Paper elevation={16}>
           <Grid container>
-            {this.props.UI.loading ? (
+            {loading ? (
               <p>Loading...</p>
             ) : (
               <>
-                {this.state.featuredVideos.map(video => {
-                  return (
-                    <Grid item key={video.Id}>
-                      <VideoCard videoInfo={video} />
-                    </Grid>
-                  )
-                })}
+                {featuredVideos.length === 0 ? (
+                  <p>No videos found</p>
+                ) : (
+                  <>
+                    {featuredVideos.map(video => {
+                      return (
+                        <Grid item key={video.Id}>
+                          <VideoCard videoInfo={video} />
+                        </Grid>
+                      )
+                    })}
+                  </>
+                )}
               </>
             )}
           </Grid>

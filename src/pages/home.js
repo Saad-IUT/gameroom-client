@@ -16,8 +16,12 @@ class home extends Component {
     this.props.getVideos()
     this.props.getUsers()
   }
+  componentDidUpdate(prevprops, prevstate) {
+    if (prevprops.user.users !== this.props.user.users) {
+      this.setState({ featuredUsers: this.props.user.users })
+    }
+  }
   render() {
-    // console.log(this.props.data)
     return (
       <div>
         <Container>
@@ -49,6 +53,7 @@ home.propTypes = {
 
 const mapStateToProps = state => ({
   data: state.data,
+  user: state.user,
 })
 
 export default connect(mapStateToProps, { getVideos, getUsers })(home)

@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
     padding: '10px',
     margin: '20px',
     cursor: 'pointer',
+    minWidth: 260,
   },
   media: {
     height: 0,

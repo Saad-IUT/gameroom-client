@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
-import EditDetails from './EditDetails'
+import EditUserDetails from './EditUserDetails'
 import MyButton from '../util/MyButton'
 import ProfileSkeleton from '../util/ProfileSkeleton'
 // MUI stuff
@@ -48,7 +48,6 @@ class Profile extends Component {
         authenticated,
       },
     } = this.props
-    // console.log(authenticated)
     let profileMarkup = !loading ? (
       authenticated ? (
         <Paper className={classes.paper}>
@@ -92,19 +91,18 @@ class Profile extends Component {
                 <Fragment>
                   <LinkIcon color='primary' />
                   <a href={website} target='_blank' rel='noopener noreferrer'>
-                    {' '}
                     {website}
                   </a>
                   <hr />
                 </Fragment>
               )}
-              <CalendarToday color='primary' />{' '}
+              <CalendarToday color='primary' />
               <span>Joined {dayjs(createdAt).format('MMM YYYY')}</span>
             </div>
             <MyButton tip='Logout' onClick={this.handleLogout}>
               <KeyboardReturn color='primary' />
             </MyButton>
-            <EditDetails />
+            <EditUserDetails />
           </div>
         </Paper>
       ) : (

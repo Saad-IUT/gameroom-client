@@ -4,9 +4,6 @@ import {
   UNLIKE_SCREAM,
   LOADING_DATA,
   DELETE_VIDEO,
-  POST_SCREAM,
-  SET_SCREAM,
-  SUBMIT_COMMENT,
 } from '../types'
 
 const initialState = {
@@ -22,17 +19,12 @@ export default function (state = initialState, action) {
         ...state,
         loading: true,
       }
-   
+
     case SET_VIDEOS:
       return {
         ...state,
         videos: action.payload,
         loading: false,
-      }
-    case SET_SCREAM:
-      return {
-        ...state,
-        scream: action.payload,
       }
     case LIKE_SCREAM:
     case UNLIKE_SCREAM:
@@ -47,26 +39,19 @@ export default function (state = initialState, action) {
         ...state,
       }
     case DELETE_VIDEO:
-      index = state.videos.findIndex(
-        video => video.videoId === action.payload
-      )
+      index = state.videos.findIndex(video => video.videoId === action.payload)
       state.videos.splice(index, 1)
       return {
         ...state,
       }
-    case POST_SCREAM:
-      return {
-        ...state,
-        screams: [action.payload, ...state.screams],
-      }
-    case SUBMIT_COMMENT:
-      return {
-        ...state,
-        scream: {
-          ...state.scream,
-          comments: [action.payload, ...state.scream.comments],
-        },
-      }
+    // case SUBMIT_COMMENT:
+    //   return {
+    //     ...state,
+    //     scream: {
+    //       ...state.scream,
+    //       comments: [action.payload, ...state.scream.comments],
+    //     },
+    //   }
     default:
       return state
   }

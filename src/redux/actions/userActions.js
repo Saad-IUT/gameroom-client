@@ -6,8 +6,7 @@ import {
   LOADING_UI,
   SET_UNAUTHENTICATED,
   LOADING_USER,
-  LOADING_DATA,
-  MARK_NOTIFICATIONS_READ,
+  STOP_LOADING_UI
 } from '../types'
 import axios from 'axios'
 
@@ -58,13 +57,16 @@ export const logoutUser = () => dispatch => {
 
 // Get all users
 export const getUsers = () => dispatch => {
-  dispatch({ type: LOADING_DATA })
+  dispatch({ type: LOADING_UI })
   axios
     .get('/users')
     .then(res => {
       dispatch({
         type: SET_USERS,
         payload: res.data,
+      })
+      dispatch({
+        type: STOP_LOADING_UI,
       })
     })
     .catch(err => {
@@ -115,16 +117,16 @@ export const editUserDetails = userDetails => dispatch => {
 }
 
 // Mark notification read
-export const markNotificationsRead = notificationIds => dispatch => {
-  axios
-    .post('/notifications', notificationIds)
-    .then(res => {
-      dispatch({
-        type: MARK_NOTIFICATIONS_READ,
-      })
-    })
-    .catch(err => console.error(err))
-}
+// export const markNotificationsRead = notificationIds => dispatch => {
+//   axios
+//     .post('/notifications', notificationIds)
+//     .then(res => {
+//       dispatch({
+//         type: MARK_NOTIFICATIONS_READ,
+//       })
+//     })
+//     .catch(err => console.error(err))
+// }
 
 const setAuthorizationHeader = token => {
   const FBIdToken = `Bearer ${token}`

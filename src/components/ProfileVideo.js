@@ -3,7 +3,6 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import PropTypes from 'prop-types'
-// import MyButton from '../util/MyButton'
 import DeleteVideo from './DeleteVideo'
 // MUI Stuff
 import Card from '@material-ui/core/Card'
@@ -14,7 +13,7 @@ import Typography from '@material-ui/core/Typography'
 // Redux
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-// import { EditOutlined } from '@material-ui/icons'
+import EditVideoDetails from './EditVideoDetails'
 
 const styles = {
   card: {
@@ -34,7 +33,6 @@ const styles = {
 class ProfileVideo extends Component {
   render() {
     dayjs.extend(relativeTime)
-
     const {
       classes,
       video: { description, createdAt, thumbnail, title, videoId, userHandle },
@@ -56,6 +54,12 @@ class ProfileVideo extends Component {
           title={`Uploaded by ${userHandle}`}
           className={classes.image}
         />
+        <EditVideoDetails
+          description={description}
+          thumbnail={thumbnail}
+          title={title}
+          videoId={videoId}
+        />
         <CardContent className={classes.content}>
           <Link to={`/videos/${videoId}`}>
             <Typography variant='h5' color='primary'>
@@ -63,9 +67,6 @@ class ProfileVideo extends Component {
             </Typography>
           </Link>
           {<hr />}
-          {/* <MyButton tip='Edit'>
-            <EditOutlined />
-          </MyButton> */}
           <Typography variant='body1'>{description}</Typography>
           {<hr />}
           <Typography variant='body2' color='textSecondary'>

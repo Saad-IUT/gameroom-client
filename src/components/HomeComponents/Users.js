@@ -1,54 +1,54 @@
 import React, { Component } from 'react'
 import UserCard from '../UserCard'
-import { Paper, Grid } from '@material-ui/core'
-import { connect } from 'react-redux'
-
+import { Paper } from '@material-ui/core'
+import axios from 'axios'
 class Users extends Component {
-  state = { featuredUsers: [] }
-  componentDidUpdate(prevprops, prevstate) {
-    if (prevprops.data.users !== this.props.data.users) {
-      this.setState({ featuredUsers: this.props.data.users })
-    }
-  }
+  state = { featuredUsers: [], loading: true }
 
+  componentDidMount() {
+    axios
+      .get('/users')
+      .then(res => {
+        this.setState({
+          featuredUsers: res.data,
+          loading: false,
+        })
+      })
+      .catch(err => {
+        console.error(err.response)
+      })
+  }
   render() {
-    // console.log(this.props)
+    const { loading, featuredUsers } = this.state
     return (
       <div style={{ paddingBottom: '60px' }}>
-        <h2>Top Mentors</h2>
+        <h2>Popular Mentors</h2>
         <hr
           style={{
-            // width: '70%',
-            // marginLeft: 0,
             height: '2px',
             background: 'black',
           }}
         />
-        <Paper elevation={16}>
-          <Grid container>
-            {this.props.UI.loading ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                {this.state.featuredUsers.map(user => {
-                  return (
-                    <Grid item key={user.Id}>
-                      <UserCard userInfo={user} />
-                    </Grid>
-                  )
-                })}
-              </>
-            )}
-          </Grid>
+        <Paper elevation={12}>
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <>
+              {featuredUsers.length === 0 ? (
+                <p>No mentors found</p>
+              ) : (
+                <>
+                  {featuredUsers.map(user => {
+                    return <UserCard userInfo={user} />
+                  })}
+                </>
+              )}
+            </>
+          )}
         </Paper>
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  data: state.data,
-  UI: state.UI,
-})
-
-export default connect(mapStateToProps)(Users)
+export default Users

@@ -21,14 +21,14 @@ function Slider() {
         <div>
           <img
             style={contentStyle}
-            src='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
+            src='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/carousel-2.jpg?alt=media'
             alt='Test'
           />
         </div>
         <div>
           <img
             style={contentStyle}
-            src='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/no-vid.png?alt=media'
+            src='https://firebasestorage.googleapis.com/v0/b/gameroom-esd.appspot.com/o/carousel-3.png?alt=media'
             alt='Test'
           />
         </div>

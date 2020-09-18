@@ -48,7 +48,7 @@ class Feed extends React.Component {
         value: '',
         comments: [
           {
-            author: 'Han Solo',
+            author: 'Anonymous',
             avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
             content: <p>{this.state.value}</p>,
             datetime: moment().fromNow(),
@@ -75,7 +75,7 @@ class Feed extends React.Component {
           avatar={
             <Avatar
               src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-              alt="Han Solo"
+              alt="Anonymous"
             />
           }
           content={
