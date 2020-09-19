@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import VideoCard from '../VideoCard'
+import VideoCard from '../Cards/VideoCard'
 import { Paper, Grid } from '@material-ui/core'
 import { connect } from 'react-redux'
 

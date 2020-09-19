@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import ReactPlayer from 'react-player'
-import Controls from '../components/Controls'
+import Controls from './Controls'
 import { makeStyles } from '@material-ui/core/styles'
 import screenful from 'screenfull'
 const useStyles = makeStyles({

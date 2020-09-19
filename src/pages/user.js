@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
-import StaticProfile from '../components/StaticProfile'
+import StaticProfile from '../components/UserComponents/StaticProfile'
 
 import ProfileSkeleton from '../util/ProfileSkeleton'
 
 import { connect } from 'react-redux'
 import { getUserData } from '../redux/actions/dataActions'
 import { Container, Grid } from '@material-ui/core'
-import ProfileVideo from '../components/ProfileVideo'
+import ProfileVideo from '../components/VideoComponents/ProfileVideo'
 
 class user extends Component {
   state = {

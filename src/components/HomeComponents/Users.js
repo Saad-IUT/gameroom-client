@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import UserCard from '../UserCard'
+import UserCard from '../Cards/UserCard'
 import { Paper } from '@material-ui/core'
 import axios from 'axios'
+
 class Users extends Component {
   state = { featuredUsers: [], loading: true }
 

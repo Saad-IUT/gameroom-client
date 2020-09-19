@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { storage } from '../util/firebase'
+import { storage } from '../../util/firebase'
 import { Button, Paper, Typography } from '@material-ui/core'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile'
-import ProgressBar from './ProgressBar'
+import ProgressBar from '../Bars/ProgressBar'
 
 function Upload(token) {
   const handleSelectVideo = () => {

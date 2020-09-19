@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import VideoPlayer from '../components/VideoPlayer'
+import VideoPlayer from '../components/VideoComponents/VideoPlayer'
 import { Container, Grid } from '@material-ui/core'
-import Comment from '../components/Comment'
+import Comment from '../components/UserComponents/Comment'
 import axios from 'axios'
-import StaticProfile from '../components/StaticProfile'
+import StaticProfile from '../components/UserComponents/StaticProfile'
+
 class VideoPage extends Component {
   videoId = window.location.pathname.split('/').pop()
   state = {

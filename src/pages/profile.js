@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
 
-import Profile from '../components/Profile'
-import Upload from '../components/Upload'
-import { getUserData } from '../redux/actions/dataActions'
+import Profile from '../components/UserComponents/Profile'
+import Upload from '../components/VideoComponents/Upload'
+import { getUserData } from '../redux/actions/userActions'
 
 import { connect } from 'react-redux'
 import { Container, Typography } from '@material-ui/core'
 import axios from 'axios'
-import ProfileVideo from '../components/ProfileVideo'
+import ProfileVideo from '../components/VideoComponents/ProfileVideo'
 
 class profile extends Component {
   state = {
