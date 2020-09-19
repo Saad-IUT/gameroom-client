@@ -8,7 +8,7 @@ import ProfileSkeleton from '../util/ProfileSkeleton'
 import { connect } from 'react-redux'
 import { getUserData } from '../redux/actions/dataActions'
 import { Container, Grid } from '@material-ui/core'
-import ProfileVideo from '../components/VideoComponents/ProfileVideo'
+import StaticVideo from '../components/VideoComponents/StaticVideo'
 
 class user extends Component {
   state = {
@@ -33,7 +33,7 @@ class user extends Component {
     ) : videos === null ? (
       <p>No videos from this user</p>
     ) : (
-      videos.map(video => <ProfileVideo key={video.videoId} video={video} />)
+      videos.map(video => <StaticVideo key={video.videoId} video={video} />)
     )
     return (
       <Container maxWidth='md'>

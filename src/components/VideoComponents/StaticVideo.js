@@ -13,8 +13,6 @@ import Typography from '@material-ui/core/Typography'
 // Redux
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import EditVideoDetails from './EditVideoDetails'
-import EditThumbnail from './EditThumbnail'
 
 const styles = {
   card: {
@@ -31,7 +29,7 @@ const styles = {
   },
 }
 
-class ProfileVideo extends Component {
+class StaticVideo extends Component {
   render() {
     dayjs.extend(relativeTime)
     const {
@@ -55,13 +53,6 @@ class ProfileVideo extends Component {
           title={`Uploaded by ${userHandle}`}
           className={classes.image}
         />
-        <EditThumbnail />
-        <EditVideoDetails
-          description={description}
-          thumbnail={thumbnail}
-          title={title}
-          videoId={videoId}
-        />
         <CardContent className={classes.content}>
           <Link to={`/videos/${videoId}`}>
             <Typography variant='h5' color='primary'>
@@ -81,7 +72,7 @@ class ProfileVideo extends Component {
   }
 }
 
-ProfileVideo.propTypes = {
+StaticVideo.propTypes = {
   user: PropTypes.object.isRequired,
   video: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
@@ -91,4 +82,4 @@ const mapStateToProps = state => ({
   user: state.user,
 })
 
-export default connect(mapStateToProps)(withStyles(styles)(ProfileVideo))
+export default connect(mapStateToProps)(withStyles(styles)(StaticVideo))
