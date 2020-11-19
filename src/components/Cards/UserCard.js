@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function RecipeReviewCard({ userInfo }) {
+const UserCard = ({ userInfo }) => {
   const classes = useStyles()
   const { imageUrl, handle, bio } = userInfo
 
@@ -50,3 +50,5 @@ export default function RecipeReviewCard({ userInfo }) {
     </Link>
   )
 }
+
+export default UserCard

@@ -1,13 +1,12 @@
 import React from 'react'
 import { Carousel } from 'antd'
 
-function Slider() {
-
+const Slider = () => {
   const contentStyle = {
     width: '100%',
     height: '90vh',
   }
-  
+
   return (
     <div className='carousel'>
       <Carousel autoplay>

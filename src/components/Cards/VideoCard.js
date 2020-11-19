@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function VideoCard({ videoInfo }) {
+const VideoCard = ({ videoInfo }) => {
   dayjs.extend(relativeTime)
   const classes = useStyles()
   const { thumbnail, title, avatar, createdAt, userHandle, videoId } = videoInfo
@@ -50,3 +50,5 @@ export default function VideoCard({ videoInfo }) {
     </Link>
   )
 }
+
+export default VideoCard

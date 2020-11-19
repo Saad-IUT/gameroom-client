@@ -82,7 +82,7 @@ export const getUserData = () => dispatch => {
   dispatch({ type: LOADING_USER })
 
   axios
-    .get('/user')
+    .get('/me')
     .then(res => {
       dispatch({
         type: SET_USER,

@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 })
 
-export default function ProgressBar(props) {
+const ProgressBar = props => {
   const classes = useStyles()
 
   return (
@@ -41,3 +41,5 @@ export default function ProgressBar(props) {
     </div>
   )
 }
+
+export default ProgressBar

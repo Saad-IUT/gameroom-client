@@ -13,7 +13,7 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import TwitterIcon from '@material-ui/icons/Twitter'
 
-export default function Footer() {
+const Footer = () => {
   return (
     <div className='footer-root'>
       <footer className='footer-footer'>
@@ -224,3 +224,5 @@ export default function Footer() {
     </div>
   )
 }
+
+export default Footer
